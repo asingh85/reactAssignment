@@ -1,13 +1,14 @@
-import { userConstants } from '../_constants';
-import { userService } from '../_services';
+import { userConstants } from '../constants';
+import { userService } from '../services';
 import { alertActions } from './';
-import { history } from '../_helpers';
+import { history } from '../helpers';
 
 export const userActions = {
     login,
     logout,
     register,
     getAll,
+    getById,
     delete: _delete
 };
 
@@ -75,6 +76,22 @@ function getAll() {
     function request() { return { type: userConstants.GETALL_REQUEST } }
     function success(users) { return { type: userConstants.GETALL_SUCCESS, users } }
     function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
+}
+
+function getById() {
+    return dispatch => {
+        dispatch(request());
+
+        userService.getById()
+            .then(
+                users => dispatch(success(users)),
+                error => dispatch(failure(error))
+            );
+    };
+
+    function request() { return { type: userConstants.GETBYID_REQUEST } }
+    function success(users) { return { type: userConstants.GETBYID_SUCCESS, users } }
+    function failure(error) { return { type: userConstants.GETBYID_FAILURE, error } }
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript

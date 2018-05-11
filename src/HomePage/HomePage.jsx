@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { userActions } from '../_actions';
+import { userActions } from '../actions';
 
 class HomePage extends React.Component {
     componentDidMount() {
@@ -18,7 +18,6 @@ class HomePage extends React.Component {
         return (
             <div className="col-md-6 col-md-offset-3">
                 <h1>Hi {user.firstName}!</h1>
-                <p>You're logged in with React!!</p>
                 <h3>All registered users:</h3>
                 {users.loading && <em>Loading users...</em>}
                 {users.error && <span className="text-danger">ERROR: {users.error}</span>}
